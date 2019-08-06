@@ -1,0 +1,12 @@
+language: python
+python:
+- '3.7'
+install:
+- pip3 install -r requirements.txt
+script:
+- python -m unittest discover
+deploy:
+  provider: heroku
+  api_key:
+    secure: d9qAKn8NG1NwjA2kPSKFlCyigL1mknUEjXfsdpmdEY6HXb8b02qCz8XPuHL6OTRoIV4Dt3LRCs0wh9k2MTFMhCxJ4XA6h+7JjN5QiBoRwMa7KkZUuN9audk6hR37wkfE0MKrHsiAxScmR5jWYpcQA1TfLb1q3wyJV2Xhbj+ipU8VSimTgcppA4xQPhElMmW2AWJYlKd4H5Kyi0bkzGCJ1dJBkX1k1uD6awcv3bBgpjNGi/6Fl8aPOi+jvDryZ4dExFl/vbN+mSgXvikgwbMVvnYH/hxA+9z3yWHu1ne/pGIwnmOBhCeyAqizmiivsHJl3OVcjSINSZslty2OHr1tgyQvJGO5coHzEVzaNjPA7lVz3RhDjY2k+ehhJvycfl3zsvDEeUNHmSAsy8HI3SXA57yxNYi3I4eyoiVXipf8REXvgdhaytxleEKguIIiz6U3zoWIvuob8lb02u6LqA16S8+/GCR/fpo02d1PPQvevbn6vvvgVJ/yXYOJEzh2qZOLb8BGCKqEs0DWJDn/ljR6fn1RguoHzDA0jbanO+zrWiDZooLlyGJBHgvx4r3kt7yEcxFpbuh0GQwX+sly5gF0mH1cpeFFAy6SHpBn2sIRp0HmqVi2ydkwvSfMHjOZ01TnDYiREZNeLNU1Wn4v21NfWAVsCOEZPR5KvD3Bkd8biYI=
+    app: cisc3140_assignment_1
