@@ -1,4 +1,4 @@
- mport urllib.request, json
+import urllib.request, json
 from flask import Flask
 
 #retrieve url object and store it.
