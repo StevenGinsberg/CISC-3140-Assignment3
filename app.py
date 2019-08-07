@@ -1,27 +1,30 @@
+ mport urllib.request, json
 from flask import Flask
-from flask import render_template
-import urllib.request
-import json
-import webbrowser
-import ssl
- 
-myKey= 'api_key=fsJlsdyc50kdcOWD7gpZMfZULF7nDkxAxuSbTqAf' 
-url=   'https://api.nasa.gov/EPIC/api/natural/date/2017-07-04?'
-# open webservice
-epurlobj1= urllib.request.urlopen(url+myKey)
-#Object is read
-epread1=epurlobj1.read()
-#Decoding json and converting to python
-decode=json.loads(epread1.decode('utf-8'))
-# Url of actual image
-newurl=  'https://epic.gsfc.nasa.gov/archive/natural/2017/07/04/png/'+decode[8]['image']+'.png'
-app= Flask(__name__,template_folder= r'../Flaskapp/templates')
+
+#retrieve url object and store it.
+urlobj = urllib.request.urlopen(
+    'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+
+#read the contents of url page and store it.
+byte_code = urlobj.read()
+
+#Parse JSON into Python dictionary and store it.
+py_dict = json.loads(byte_code.decode()) 
+
+#declare a string.
+string_to_display = '<img src="'+ py_dict['hdurl'] +'" alt="no image found " width="500" height="400"> <br>'
+
+#append said string with all the values from py_dict.
+for data_type, description in py_dict.items():
+    string_to_display+= '<strong>' + data_type + '</strong>' + ': ' + description + '<br>'
+
+#instanciate Flask object.
+app = Flask('__name__')
+
+#return the string to the page.
 @app.route('/')
 def index():
- return  render_template('index.html',my_url=newurl,capt=decode[8]['caption'],
- vers=decode[8]['version'],date=decode[8]['date'])
- if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=8080, debug=True)
+    return string_to_display
 
-
- 
+if __name__ == '__main__':
+    app.run()
